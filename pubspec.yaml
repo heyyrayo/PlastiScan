@@ -1,0 +1,99 @@
+name: plastiscan
+
+description: "PlastiScan — AI-powered plastic safety scanner."
+
+publish_to: "none"
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ============================================================
+  # UI & TYPOGRAPHY
+  # ============================================================
+
+  # Google Fonts used by the PlastiScan design system
+  google_fonts: ^6.2.1
+
+
+  # ============================================================
+  # CAMERA & IMAGE HANDLING
+  # ============================================================
+
+  # Live camera preview and taking photos
+  camera: ^0.11.0+2
+
+  # Select product images from the device gallery
+  image_picker: ^1.1.2
+
+  # Compress captured/selected images before upload and AI analysis
+  flutter_image_compress: ^2.4.0
+
+
+  # ============================================================
+  # UI EFFECTS
+  # ============================================================
+
+  # Skeleton loading shimmer
+  shimmer: ^3.0.0
+
+
+  # ============================================================
+  # STATE MANAGEMENT
+  # ============================================================
+
+  # Riverpod for application state
+  flutter_riverpod: ^2.6.1
+
+
+  # ============================================================
+  # NAVIGATION
+  # ============================================================
+
+  # GoRouter for application navigation and authentication redirects
+  go_router: ^14.6.2
+
+
+  # ============================================================
+  # BACKEND
+  # ============================================================
+
+  # Supabase authentication, database and storage
+  supabase_flutter: ^2.17.1
+
+
+  # ============================================================
+  # ENVIRONMENT VARIABLES
+  # ============================================================
+
+  # Loads Supabase configuration from .env
+  flutter_dotenv: ^6.0.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Flutter recommended lint rules
+  flutter_lints: ^5.0.0
+
+
+# ==============================================================
+# FLUTTER CONFIGURATION
+# ==============================================================
+
+flutter:
+  # Material icons and Material Design support
+  uses-material-design: true
+
+  # Application assets
+  assets:
+    - .env
+    - assets/illustrations/
+    - assets/logo/
+    - assets/icons/
