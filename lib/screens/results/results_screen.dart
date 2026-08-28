@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/navigation/app_navigation.dart';
 import '../../models/scan_result.dart';
 import '../../models/risk_level.dart';
 import '../../theme/plastiscan_colors.dart';
@@ -62,14 +63,12 @@ class _ResultsScreenState extends State<ResultsScreen>
         title: const Text('Analysis Results'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => context.go('/'),
+          onPressed: () => goBackOrHome(context),
         ),
         actions: [
           IconButton(
             icon: const Icon(Icons.share_rounded),
-            onPressed: () {
-              // TODO(engineer): implement share via platform share sheet
-            },
+            onPressed: () => _showReportActions(context),
           ),
         ],
       ),
@@ -167,9 +166,7 @@ class _ResultsScreenState extends State<ResultsScreen>
                     width: double.infinity,
                     child: SecondaryButton(
                       label: 'View Full Report',
-                      onPressed: () {
-                        // TODO(engineer): expand full chemical breakdown report
-                      },
+                      onPressed: () => _showReportActions(context),
                       leadingIcon: Icons.description_outlined,
                     ),
                   ),
@@ -178,6 +175,39 @@ class _ResultsScreenState extends State<ResultsScreen>
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void _showReportActions(BuildContext context) {
+    final result = _result;
+    showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (sheetContext) => SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(20, 4, 20, 20),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Plastic report', style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: 12),
+              Text('Product: ${result.productName}'),
+              Text('Type: ${result.plasticType}'),
+              Text('Risk: ${result.riskLevel.label}'),
+              if (result.notes != null) Text('Notes: ${result.notes}'),
+              const SizedBox(height: 16),
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton(
+                  onPressed: () => Navigator.of(sheetContext).pop(),
+                  child: const Text('Done'),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

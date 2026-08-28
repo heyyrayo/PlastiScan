@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/navigation/app_navigation.dart';
 import '../../services/analysis_service.dart';
 import '../../widgets/app_chip.dart';
 import '../../widgets/app_text_field.dart';
@@ -66,7 +67,7 @@ class _ManualEntryScreenState extends State<ManualEntryScreen> {
         title: const Text('Manual Entry'),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => context.go('/'),
+          onPressed: () => goBackOrHome(context),
         ),
       ),
       body: Column(

@@ -2,11 +2,11 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../services/storage_service.dart';
+import '../../core/navigation/app_navigation.dart';
 import '../../theme/plastiscan_colors.dart';
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -611,7 +611,7 @@ class _ScanScreenState extends State<ScanScreen> with TickerProviderStateMixin {
                   children: [
                     _TopBarButton(
                       icon: Icons.close_rounded,
-                      onTap: () => context.go('/'),
+                      onTap: () => goBackOrHome(context),
                     ),
 
                     const Spacer(),

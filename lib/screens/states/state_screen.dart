@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/navigation/app_navigation.dart';
 import '../../widgets/buttons/app_buttons.dart';
 
 /// Shared parameterized state screen for all edge/empty states:
@@ -100,7 +101,7 @@ class StateScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_rounded),
-          onPressed: () => context.go('/'),
+          onPressed: () => goBackOrHome(context),
         ),
       ),
       body: Center(
