@@ -4,6 +4,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../theme/plastiscan_colors.dart';
 import '../../widgets/app_card.dart';
+import '../../widgets/profile_avatar.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -96,15 +97,7 @@ class ProfileScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(height: 16),
-                      CircleAvatar(
-                        radius: 40,
-                        backgroundColor: Colors.white.withValues(alpha: 0.2),
-                        child: const Icon(
-                          Icons.person_rounded,
-                          color: Colors.white,
-                          size: 44,
-                        ),
-                      ),
+                      const ProfileAvatar(radius: 40),
                       const SizedBox(height: 12),
                       Text(
                         displayName,
@@ -171,7 +164,7 @@ class ProfileScreen extends StatelessWidget {
                 _SettingsTile(
                   icon: Icons.notifications_outlined,
                   label: 'Notifications',
-                  onTap: () {},
+                  onTap: () => context.push('/notifications'),
                 ),
 
                 const SizedBox(height: 8),
@@ -179,7 +172,7 @@ class ProfileScreen extends StatelessWidget {
                 _SettingsTile(
                   icon: Icons.shield_outlined,
                   label: 'Privacy & Data',
-                  onTap: () {},
+                  onTap: () => context.push('/privacy-data'),
                 ),
 
                 const SizedBox(height: 8),
@@ -187,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
                 _SettingsTile(
                   icon: Icons.help_outline_rounded,
                   label: 'Help & Support',
-                  onTap: () {},
+                  onTap: () => context.push('/about'),
                 ),
 
                 const SizedBox(height: 8),

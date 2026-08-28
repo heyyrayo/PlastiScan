@@ -7,6 +7,7 @@ import '../../theme/plastiscan_colors.dart';
 import '../../widgets/app_card.dart';
 import '../../widgets/molecular_background.dart';
 import '../../widgets/skeleton_loader.dart';
+import '../../widgets/profile_avatar.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -71,7 +72,7 @@ class HomeScreen extends ConsumerWidget {
                 ],
               ),
             ),
-            leadingWidth: 132,
+            leadingWidth: 176,
             leading: Padding(
               padding: const EdgeInsets.only(left: 18),
               child: Row(
@@ -82,11 +83,14 @@ class HomeScreen extends ConsumerWidget {
                     height: 34,
                   ),
                   const SizedBox(width: 8),
-                  Text(
-                    'PlastiScan',
-                    style: textTheme.titleMedium?.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
+                  Flexible(
+                    child: Text(
+                      'PlastiScan',
+                      maxLines: 1,
+                      style: textTheme.titleMedium?.copyWith(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
                 ],
@@ -95,10 +99,9 @@ class HomeScreen extends ConsumerWidget {
             actions: [
               Padding(
                 padding: const EdgeInsets.only(right: 16),
-                child: CircleAvatar(
+                child: ProfileAvatar(
                   radius: 18,
-                  backgroundColor: Colors.white.withValues(alpha: 0.2),
-                  child: const Icon(Icons.person_rounded, color: Colors.white, size: 20),
+                  onTap: () => context.push('/profile'),
                 ),
               ),
             ],
@@ -120,7 +123,7 @@ class HomeScreen extends ConsumerWidget {
                           icon: Icons.qr_code_scanner_rounded,
                           label: 'Scan Item',
                           color: cs.primary,
-                          onTap: () => context.go('/scan'),
+                          onTap: () => context.push('/scan'),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -129,7 +132,7 @@ class HomeScreen extends ConsumerWidget {
                           icon: Icons.edit_rounded,
                           label: 'Manual Entry',
                           color: colors.gradientEnd,
-                          onTap: () => context.go('/manual-entry'),
+                          onTap: () => context.push('/manual-entry'),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -159,7 +162,8 @@ class HomeScreen extends ConsumerWidget {
                   TextButton(
                     onPressed: () => context.go('/history'),
                     child: Text('See all',
-                        style: textTheme.labelMedium?.copyWith(color: cs.primary)),
+                        style:
+                            textTheme.labelMedium?.copyWith(color: cs.primary)),
                   ),
                 ],
               ),
@@ -185,7 +189,7 @@ class HomeScreen extends ConsumerWidget {
                       child: _RecentScanCard(
                         result: result,
                         animationDelay: Duration(milliseconds: i * 60),
-                        onTap: () => context.go('/results', extra: result),
+                        onTap: () => context.push('/results', extra: result),
                       ),
                     );
                   },
@@ -201,34 +205,34 @@ class HomeScreen extends ConsumerWidget {
   }
 
   List<ScanResult> _stubRecentScans() => [
-    ScanResult(
-      id: 'S001',
-      productName: 'Water Bottle',
-      plasticType: 'PET-1',
-      riskLevel: RiskLevel.low,
-      scannedAt: DateTime.now().subtract(const Duration(hours: 2)),
-      riskScore: 1.8,
-      chemicalCodes: ['BPA-FREE', 'PET-1'],
-    ),
-    ScanResult(
-      id: 'S002',
-      productName: 'Food Container',
-      plasticType: 'PP-5',
-      riskLevel: RiskLevel.medium,
-      scannedAt: DateTime.now().subtract(const Duration(days: 1)),
-      riskScore: 5.2,
-      chemicalCodes: ['PP-5', 'FOOD-SAFE'],
-    ),
-    ScanResult(
-      id: 'S003',
-      productName: 'Plastic Bag',
-      plasticType: 'LDPE-4',
-      riskLevel: RiskLevel.high,
-      scannedAt: DateTime.now().subtract(const Duration(days: 2)),
-      riskScore: 7.9,
-      chemicalCodes: ['LDPE-4', 'PVC-ADJ'],
-    ),
-  ];
+        ScanResult(
+          id: 'S001',
+          productName: 'Water Bottle',
+          plasticType: 'PET-1',
+          riskLevel: RiskLevel.low,
+          scannedAt: DateTime.now().subtract(const Duration(hours: 2)),
+          riskScore: 1.8,
+          chemicalCodes: ['BPA-FREE', 'PET-1'],
+        ),
+        ScanResult(
+          id: 'S002',
+          productName: 'Food Container',
+          plasticType: 'PP-5',
+          riskLevel: RiskLevel.medium,
+          scannedAt: DateTime.now().subtract(const Duration(days: 1)),
+          riskScore: 5.2,
+          chemicalCodes: ['PP-5', 'FOOD-SAFE'],
+        ),
+        ScanResult(
+          id: 'S003',
+          productName: 'Plastic Bag',
+          plasticType: 'LDPE-4',
+          riskLevel: RiskLevel.high,
+          scannedAt: DateTime.now().subtract(const Duration(days: 2)),
+          riskScore: 7.9,
+          chemicalCodes: ['LDPE-4', 'PVC-ADJ'],
+        ),
+      ];
 }
 
 // ─── Quick action card ────────────────────────────────────────────────────────
@@ -265,8 +269,8 @@ class _QuickActionCard extends StatelessWidget {
           Text(
             label,
             style: Theme.of(context).textTheme.labelMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface,
-            ),
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
             textAlign: TextAlign.center,
             maxLines: 2,
           ),
