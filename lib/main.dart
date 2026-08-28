@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/config/supabase_config.dart';
-import 'core/navigation/app_navigation.dart';
 import 'router/app_router.dart';
 import 'theme/app_theme.dart';
 
@@ -44,10 +43,6 @@ class PlastiScanApp extends StatelessWidget {
 
       // Existing application routing
       routerConfig: appRouter,
-      builder: (context, child) => AppBackHandler(
-        location: appRouter.routerDelegate.currentConfiguration.uri.path,
-        child: child ?? const SizedBox.shrink(),
-      ),
     );
   }
 }

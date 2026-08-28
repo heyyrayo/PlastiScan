@@ -10,11 +10,13 @@ import '../screens/history/history_screen.dart';
 import '../screens/home/home_screen.dart';
 import '../screens/manual_entry/manual_entry_screen.dart';
 import '../screens/profile/profile_screen.dart';
+import '../screens/profile/profile_detail_screens.dart';
 import '../screens/results/results_screen.dart';
 import '../screens/scan/scan_screen.dart';
 import '../screens/states/state_screen.dart';
 
 import '../widgets/bottom_nav_bar.dart';
+import '../core/navigation/app_navigation.dart';
 
 import 'auth_router_notifier.dart';
 
@@ -40,7 +42,12 @@ class _ShellScaffold extends StatelessWidget {
   int get _navIndex {
     if (location.startsWith('/history')) return 1;
     if (location.startsWith('/manual-entry')) return 3;
-    if (location.startsWith('/profile')) return 4;
+    if (location.startsWith('/profile') ||
+        location == '/notifications' ||
+        location == '/privacy-data' ||
+        location == '/about') {
+      return 4;
+    }
 
     return 0;
   }
@@ -60,7 +67,7 @@ class _ShellScaffold extends StatelessWidget {
               context.go('/history');
 
             case 2:
-              context.go('/scan');
+              context.push('/scan');
 
             case 3:
               context.go('/manual-entry');
@@ -137,9 +144,12 @@ final appRouter = GoRouter(
 
     ShellRoute(
       builder: (context, state, child) {
-        return _ShellScaffold(
+        return AppBackHandler(
           location: state.uri.path,
-          child: child,
+          child: _ShellScaffold(
+            location: state.uri.path,
+            child: child,
+          ),
         );
       },
       routes: [
@@ -166,6 +176,18 @@ final appRouter = GoRouter(
           builder: (context, state) {
             return const ProfileScreen();
           },
+        ),
+        GoRoute(
+          path: '/notifications',
+          builder: (context, state) => const NotificationsScreen(),
+        ),
+        GoRoute(
+          path: '/privacy-data',
+          builder: (context, state) => const PrivacyDataScreen(),
+        ),
+        GoRoute(
+          path: '/about',
+          builder: (context, state) => const AboutPlastiScanScreen(),
         ),
       ],
     ),
