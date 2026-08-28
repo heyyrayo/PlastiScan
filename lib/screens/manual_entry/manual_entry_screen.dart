@@ -49,11 +49,12 @@ class _ManualEntryScreenState extends State<ManualEntryScreen> {
     final result = await service.analyzeManualEntry(
       productName: _productNameCtrl.text.trim(),
       plasticCode: _plasticCodeCtrl.text.trim().toUpperCase(),
-      additionalNotes: _notesCtrl.text.trim().isEmpty ? null : _notesCtrl.text.trim(),
+      additionalNotes:
+          _notesCtrl.text.trim().isEmpty ? null : _notesCtrl.text.trim(),
     );
     if (mounted) {
       setState(() => _isLoading = false);
-      context.go('/ai-analysis', extra: result);
+      context.push('/ai-analysis', extra: result);
     }
   }
 
@@ -85,8 +86,8 @@ class _ManualEntryScreenState extends State<ManualEntryScreen> {
                   const SizedBox(height: 8),
                   Text(
                     'Provide as much information as possible for\na more accurate analysis.',
-                    style: textTheme.bodyMedium?.copyWith(
-                        color: cs.onSurfaceVariant),
+                    style: textTheme.bodyMedium
+                        ?.copyWith(color: cs.onSurfaceVariant),
                   ),
                   const SizedBox(height: 24),
 
@@ -126,9 +127,8 @@ class _ManualEntryScreenState extends State<ManualEntryScreen> {
                       return CategoryChip(
                         label: cat,
                         selected: _selectedCategory == cat,
-                        onTap: () =>
-                            setState(() => _selectedCategory =
-                                _selectedCategory == cat ? null : cat),
+                        onTap: () => setState(() => _selectedCategory =
+                            _selectedCategory == cat ? null : cat),
                       );
                     }).toList(),
                   ),

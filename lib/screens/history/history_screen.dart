@@ -33,17 +33,20 @@ class _HistoryScreenState extends State<HistoryScreen> {
 
   List<HistoryEntry> get _entries {
     final all = _stubEntries();
-    return all.map((group) {
-      final filtered = group.results.where((r) {
-        final matchesQuery = _query.isEmpty ||
-            r.productName.toLowerCase().contains(_query.toLowerCase()) ||
-            r.plasticType.toLowerCase().contains(_query.toLowerCase());
-        final matchesFilter = _activeFilter == 'All' ||
-            r.riskLevel.label == _activeFilter;
-        return matchesQuery && matchesFilter;
-      }).toList();
-      return HistoryEntry(period: group.period, results: filtered);
-    }).where((g) => g.results.isNotEmpty).toList();
+    return all
+        .map((group) {
+          final filtered = group.results.where((r) {
+            final matchesQuery = _query.isEmpty ||
+                r.productName.toLowerCase().contains(_query.toLowerCase()) ||
+                r.plasticType.toLowerCase().contains(_query.toLowerCase());
+            final matchesFilter =
+                _activeFilter == 'All' || r.riskLevel.label == _activeFilter;
+            return matchesQuery && matchesFilter;
+          }).toList();
+          return HistoryEntry(period: group.period, results: filtered);
+        })
+        .where((g) => g.results.isNotEmpty)
+        .toList();
   }
 
   @override
@@ -95,9 +98,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   child: Text(
                     group.period,
                     style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                      color: cs.onSurfaceVariant,
-                      fontWeight: FontWeight.w600,
-                    ),
+                          color: cs.onSurfaceVariant,
+                          fontWeight: FontWeight.w600,
+                        ),
                   ),
                 ),
               ),
@@ -110,7 +113,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       child: TimelineItemCard(
                         result: group.results[i],
                         onTap: () =>
-                            context.go('/results', extra: group.results[i]),
+                            context.push('/results', extra: group.results[i]),
                       ),
                     ),
                     childCount: group.results.length,
@@ -126,47 +129,62 @@ class _HistoryScreenState extends State<HistoryScreen> {
   }
 
   List<HistoryEntry> _stubEntries() => [
-    HistoryEntry(
-      period: 'Today',
-      results: [
-        ScanResult(
-          id: 'S001', productName: 'Water Bottle', plasticType: 'PET-1',
-          riskLevel: RiskLevel.low, scannedAt: DateTime.now(),
-          riskScore: 1.8,
+        HistoryEntry(
+          period: 'Today',
+          results: [
+            ScanResult(
+              id: 'S001',
+              productName: 'Water Bottle',
+              plasticType: 'PET-1',
+              riskLevel: RiskLevel.low,
+              scannedAt: DateTime.now(),
+              riskScore: 1.8,
+            ),
+            ScanResult(
+              id: 'S002',
+              productName: 'Shampoo Bottle',
+              plasticType: 'HDPE-2',
+              riskLevel: RiskLevel.low,
+              scannedAt: DateTime.now(),
+              riskScore: 2.3,
+            ),
+          ],
         ),
-        ScanResult(
-          id: 'S002', productName: 'Shampoo Bottle', plasticType: 'HDPE-2',
-          riskLevel: RiskLevel.low, scannedAt: DateTime.now(),
-          riskScore: 2.3,
+        HistoryEntry(
+          period: 'This Week',
+          results: [
+            ScanResult(
+              id: 'S003',
+              productName: 'Food Container',
+              plasticType: 'PP-5',
+              riskLevel: RiskLevel.medium,
+              scannedAt: DateTime.now().subtract(const Duration(days: 3)),
+              riskScore: 5.0,
+            ),
+            ScanResult(
+              id: 'S004',
+              productName: 'Cling Wrap',
+              plasticType: 'PVC-3',
+              riskLevel: RiskLevel.high,
+              scannedAt: DateTime.now().subtract(const Duration(days: 5)),
+              riskScore: 8.1,
+            ),
+          ],
         ),
-      ],
-    ),
-    HistoryEntry(
-      period: 'This Week',
-      results: [
-        ScanResult(
-          id: 'S003', productName: 'Food Container', plasticType: 'PP-5',
-          riskLevel: RiskLevel.medium, scannedAt: DateTime.now().subtract(const Duration(days: 3)),
-          riskScore: 5.0,
+        HistoryEntry(
+          period: 'Earlier',
+          results: [
+            ScanResult(
+              id: 'S005',
+              productName: 'Plastic Bag',
+              plasticType: 'LDPE-4',
+              riskLevel: RiskLevel.unknown,
+              scannedAt: DateTime.now().subtract(const Duration(days: 14)),
+              riskScore: 0,
+            ),
+          ],
         ),
-        ScanResult(
-          id: 'S004', productName: 'Cling Wrap', plasticType: 'PVC-3',
-          riskLevel: RiskLevel.high, scannedAt: DateTime.now().subtract(const Duration(days: 5)),
-          riskScore: 8.1,
-        ),
-      ],
-    ),
-    HistoryEntry(
-      period: 'Earlier',
-      results: [
-        ScanResult(
-          id: 'S005', productName: 'Plastic Bag', plasticType: 'LDPE-4',
-          riskLevel: RiskLevel.unknown, scannedAt: DateTime.now().subtract(const Duration(days: 14)),
-          riskScore: 0,
-        ),
-      ],
-    ),
-  ];
+      ];
 }
 
 // ─── Sliver header for search + filter ───────────────────────────────────────

@@ -27,6 +27,7 @@ class StateScreen extends StatelessWidget {
   final String? secondaryActionLabel;
   final VoidCallback? onSecondaryAction;
   final Color? iconColor;
+
   /// Optional asset path for a hero illustration (e.g. 'assets/illustrations/state_illustration.png').
   /// When provided, replaces the plain icon circle.
   final String? illustrationAsset;
@@ -48,7 +49,8 @@ class StateScreen extends StatelessWidget {
   factory StateScreen.noInternet(BuildContext context) => StateScreen(
         icon: Icons.signal_wifi_statusbar_connected_no_internet_4_rounded,
         headline: 'No Internet Connection',
-        body: 'PlastiScan needs internet to run AI analysis.\nYou can still browse your saved history.',
+        body:
+            'PlastiScan needs internet to run AI analysis.\nYou can still browse your saved history.',
         primaryActionLabel: 'Retry',
         onPrimaryAction: () => context.go('/'),
         secondaryActionLabel: 'View History',
@@ -60,7 +62,8 @@ class StateScreen extends StatelessWidget {
   factory StateScreen.analysisFailed(BuildContext context) => StateScreen(
         icon: Icons.error_outline_rounded,
         headline: 'Analysis Failed',
-        body: 'We could not process this item. The image may be unclear,\nor the plastic type is not in our database.',
+        body:
+            'We could not process this item. The image may be unclear,\nor the plastic type is not in our database.',
         primaryActionLabel: 'Try Again',
         onPrimaryAction: () => context.go('/scan'),
         secondaryActionLabel: 'Enter Manually',
@@ -72,7 +75,8 @@ class StateScreen extends StatelessWidget {
   factory StateScreen.noHistory(BuildContext context) => StateScreen(
         icon: Icons.history_rounded,
         headline: 'No Scans Yet',
-        body: 'Your scan history will appear here.\nStart by scanning a plastic item.',
+        body:
+            'Your scan history will appear here.\nStart by scanning a plastic item.',
         primaryActionLabel: 'Scan Now',
         onPrimaryAction: () => context.go('/scan'),
         iconColor: const Color(0xFF3C6657),
@@ -82,7 +86,8 @@ class StateScreen extends StatelessWidget {
   factory StateScreen.unknownProduct(BuildContext context) => StateScreen(
         icon: Icons.help_outline_rounded,
         headline: 'Product Not Recognised',
-        body: 'We could not identify this product from the scan.\nTry entering the plastic code manually.',
+        body:
+            'We could not identify this product from the scan.\nTry entering the plastic code manually.',
         primaryActionLabel: 'Manual Entry',
         onPrimaryAction: () => context.go('/manual-entry'),
         secondaryActionLabel: 'Scan Again',
@@ -131,21 +136,19 @@ class StateScreen extends StatelessWidget {
                   child: Icon(icon, size: 56, color: iconClr),
                 ),
               const SizedBox(height: 32),
-
               Text(
                 headline,
                 style: textTheme.headlineMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 12),
-
               Text(
                 body,
-                style: textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+                style:
+                    textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 40),
-
               SizedBox(
                 width: double.infinity,
                 child: PrimaryButton(
@@ -153,8 +156,8 @@ class StateScreen extends StatelessWidget {
                   onPressed: onPrimaryAction,
                 ),
               ),
-
-              if (secondaryActionLabel != null && onSecondaryAction != null) ...[
+              if (secondaryActionLabel != null &&
+                  onSecondaryAction != null) ...[
                 const SizedBox(height: 12),
                 SizedBox(
                   width: double.infinity,

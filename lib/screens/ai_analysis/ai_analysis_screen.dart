@@ -60,7 +60,7 @@ class _AiAnalysisScreenState extends State<AiAnalysisScreen>
     // Total analysis time ~6s, then navigate to results
     Future.delayed(const Duration(milliseconds: 6500), () {
       if (mounted && widget.pendingResult != null) {
-        context.go('/results', extra: widget.pendingResult);
+        context.push('/results', extra: widget.pendingResult);
       } else if (mounted) {
         context.go('/');
       }
@@ -209,12 +209,15 @@ class _ProgressRingPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     const stroke = 10.0;
-    final rect = Rect.fromLTWH(stroke / 2, stroke / 2,
-        size.width - stroke, size.height - stroke);
+    final rect = Rect.fromLTWH(
+        stroke / 2, stroke / 2, size.width - stroke, size.height - stroke);
 
     // Track
     canvas.drawArc(
-      rect, -1.5708, 6.2832, false,
+      rect,
+      -1.5708,
+      6.2832,
+      false,
       Paint()
         ..color = gradientStart.withValues(alpha: 0.12)
         ..strokeWidth = stroke
@@ -225,7 +228,10 @@ class _ProgressRingPainter extends CustomPainter {
     // Animated arc
     final sweep = 6.2832 * progress;
     canvas.drawArc(
-      rect, -1.5708, sweep, false,
+      rect,
+      -1.5708,
+      sweep,
+      false,
       Paint()
         ..shader = SweepGradient(
           startAngle: -1.5708,

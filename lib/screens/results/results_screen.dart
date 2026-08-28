@@ -101,13 +101,12 @@ class _ResultsScreenState extends State<ResultsScreen>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(result.productName,
-                      style: textTheme.headlineMedium),
+                  Text(result.productName, style: textTheme.headlineMedium),
                   const SizedBox(height: 4),
                   Text(
                     result.id,
-                    style: textTheme.labelMedium?.copyWith(
-                        color: cs.onSurfaceVariant),
+                    style: textTheme.labelMedium
+                        ?.copyWith(color: cs.onSurfaceVariant),
                   ),
                   const SizedBox(height: 24),
                 ],
@@ -157,7 +156,7 @@ class _ResultsScreenState extends State<ResultsScreen>
                     width: double.infinity,
                     child: PrimaryButton(
                       label: 'Scan Another Item',
-                      onPressed: () => context.go('/scan'),
+                      onPressed: () => context.push('/scan'),
                       leadingIcon: Icons.qr_code_scanner_rounded,
                     ),
                   ),
@@ -191,7 +190,8 @@ class _ResultsScreenState extends State<ResultsScreen>
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Plastic report', style: Theme.of(context).textTheme.titleLarge),
+              Text('Plastic report',
+                  style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 12),
               Text('Product: ${result.productName}'),
               Text('Type: ${result.plasticType}'),
@@ -239,9 +239,8 @@ class _ResultsScreenState extends State<ResultsScreen>
         body: r.riskLevel == RiskLevel.low
             ? 'No significant leaching detected at normal conditions'
             : 'Potential leaching detected — avoid prolonged contact with hot liquids',
-        iconColor: r.riskLevel == RiskLevel.high
-            ? colors.riskHigh
-            : colors.riskLow,
+        iconColor:
+            r.riskLevel == RiskLevel.high ? colors.riskHigh : colors.riskLow,
       ),
       ResultDetailCard(
         icon: Icons.recycling_rounded,
@@ -277,8 +276,10 @@ class _CodeChip extends StatelessWidget {
       ),
       child: Text(
         code,
-        style: Theme.of(context).textTheme.labelMedium?.copyWith(
-            color: cs.primary),
+        style: Theme.of(context)
+            .textTheme
+            .labelMedium
+            ?.copyWith(color: cs.primary),
       ),
     );
   }

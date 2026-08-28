@@ -803,7 +803,7 @@ class _ScanScreenState extends State<ScanScreen> with TickerProviderStateMixin {
                       child: _BottomAction(
                         icon: Icons.edit_outlined,
                         label: 'Manual',
-                        onTap: () => context.go(
+                        onTap: () => context.push(
                           '/manual-entry',
                         ),
                       ),
