@@ -71,11 +71,25 @@ class HomeScreen extends ConsumerWidget {
                 ],
               ),
             ),
+            leadingWidth: 132,
             leading: Padding(
-              padding: const EdgeInsets.all(10),
-              child: Image.asset(
-                'assets/logo/plastiscan_logo.png',
-                fit: BoxFit.contain,
+              padding: const EdgeInsets.only(left: 18),
+              child: Row(
+                children: [
+                  Image.asset(
+                    'assets/logo/plastiscan_icon_transparent.png',
+                    width: 34,
+                    height: 34,
+                  ),
+                  const SizedBox(width: 8),
+                  Text(
+                    'PlastiScan',
+                    style: textTheme.titleMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
               ),
             ),
             actions: [
