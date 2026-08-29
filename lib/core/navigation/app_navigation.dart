@@ -11,6 +11,24 @@ bool isPrimaryDestination(String location) {
       location == '/profile';
 }
 
+Future<void> goToHome(BuildContext context) async {
+  if (GoRouterState.of(context).uri.path != '/') {
+    context.go('/');
+  }
+}
+
+Future<void> goToScan(BuildContext context) async {
+  if (GoRouterState.of(context).uri.path != '/scan') {
+    context.push('/scan');
+  }
+}
+
+Future<void> goToManualEntry(BuildContext context) async {
+  if (GoRouterState.of(context).uri.path != '/manual-entry') {
+    context.push('/manual-entry');
+  }
+}
+
 Future<void> goBackOrHome(BuildContext context) async {
   final location = GoRouterState.of(context).uri.path;
 

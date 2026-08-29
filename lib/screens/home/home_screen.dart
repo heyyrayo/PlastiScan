@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import '../../core/navigation/app_navigation.dart';
 import '../../models/risk_level.dart';
 import '../../models/scan_result.dart';
 import '../../theme/plastiscan_colors.dart';
@@ -123,7 +124,7 @@ class HomeScreen extends ConsumerWidget {
                           icon: Icons.qr_code_scanner_rounded,
                           label: 'Scan Item',
                           color: cs.primary,
-                          onTap: () => context.push('/scan'),
+                          onTap: () => goToScan(context),
                         ),
                       ),
                       const SizedBox(width: 12),
@@ -132,7 +133,7 @@ class HomeScreen extends ConsumerWidget {
                           icon: Icons.edit_rounded,
                           label: 'Manual Entry',
                           color: colors.gradientEnd,
-                          onTap: () => context.push('/manual-entry'),
+                          onTap: () => goToManualEntry(context),
                         ),
                       ),
                       const SizedBox(width: 12),

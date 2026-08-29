@@ -160,6 +160,10 @@ flutter run
 
 ---
 
+## Navigation Behavior
+
+PlastiScan keeps the route stack predictable by pushing detail flows such as scan, results, and manual entry instead of replacing the shell root. Shared helpers in `lib/core/navigation/app_navigation.dart` decide when to pop the current route or return to `/` for back and system-back actions, which keeps app flow consistent across Android back gestures, custom app bars, and shell navigation.
+
 ## Contributing
 
 1. Fork the repo and create a feature branch: `git checkout -b feat/your-feature`
