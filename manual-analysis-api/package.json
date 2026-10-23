@@ -1,0 +1,29 @@
+{
+  "name": "plastiscan-api",
+  "version": "1.0.0",
+  "description": "PlastiScan AI analysis backend — Groq Vision & Text + Express, deployable on Render.",
+  "private": true,
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "jest --runInBand"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
+    "express": "^4.19.2",
+    "groq-sdk": "^0.7.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/test/**/*.test.js"
+    ],
+    "clearMocks": true
+  }
+}
